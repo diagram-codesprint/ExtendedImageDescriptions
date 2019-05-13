@@ -1,0 +1,60 @@
+{
+  "name": "extended-image-descriptions",
+  "version": "0.1.0",
+  "description": "An accessible interface for image details",
+  "keywords": [
+    "a11y",
+    "accessibility",
+    "alt",
+    "alt text",
+    "aria-details",
+    "details",
+    "disclosure",
+    "image",
+    "img",
+    "longdesc",
+    "summary"
+  ],
+  "homepage": "https://github.com/diagram-codesprint/ExtendedImageDescriptions#readme",
+  "bugs": {
+    "url": "https://github.com/diagram-codesprint/ExtendedImageDescriptions/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/diagram-codesprint/ExtendedImageDescriptions.git"
+  },
+  "license": "MIT",
+  "contributors": [
+    {
+      "name": "Charles LaPierre",
+      "email": "charlesl@benetech.org"
+    },
+    {
+      "name": "Derek Riemer",
+      "email": "derek@derekriemer.com"
+    },
+    {
+      "name": "Sina Bahram",
+      "email": "sina@sinabahram.com"
+    },
+    {
+      "name": "Evan Yamanishi",
+      "email": "eyamanishi@wwnorton.com"
+    }
+  ],
+  "main": "dist/index.js",
+  "module": "src/index.js",
+  "scripts": {
+    "build": "npm run build:umd",
+    "build:umd": "rollup src/index.js --file dist/index.js --format umd --name ExtendedImageDescriptions",
+    "dev": "npm run build:umd -- --watch",
+    "lint": "eslint .",
+    "test": "nyc ava"
+  },
+  "devDependencies": {
+    "eslint": "^5.3.0",
+    "eslint-config-airbnb-base": "^13.1.0",
+    "eslint-plugin-import": "^2.17.2",
+    "rollup": "^1.11.3"
+  }
+}
