@@ -114,7 +114,7 @@ summary::details-marker {
   display: none;
 }
 
-details summary + div {
+.detailed-contents {
   overflow-y: hidden;
   transition: height var(--duration-expand) var(--easing-standard);
   top: 0;
@@ -158,7 +158,7 @@ details summary + div {
   transform: rotate(90deg);
 }
 
-details[open] summary + div {
+details[open] .detailed-contents {
   transition: height var(--duration-collapse) var(--easing-standard);
 }
 
@@ -183,7 +183,7 @@ details[open] .details-marker.up.closing {
 }
 
 @media screen and (prefers-reduced-motion: reduce) {
-  details summary + div,
+  .detailed-contents,
   .details-marker {
     transition: none !important;
   }
