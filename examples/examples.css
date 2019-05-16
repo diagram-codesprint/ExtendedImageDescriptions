@@ -49,6 +49,17 @@ summary.dm-right {
   justify-content: space-between;
 }
 
+summary::-webkit-details-marker {
+  display: none;
+}
+
+summary::-moz-details-marker,
+summary::-ms-details-marker,
+summary::-o-details-marker,
+summary::details-marker {
+  display: none;
+}
+
 details summary + div {
   overflow-y: hidden;
   transition: height var(--duration-expand) var(--easing-standard);
