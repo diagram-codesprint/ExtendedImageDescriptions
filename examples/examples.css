@@ -16,19 +16,72 @@ figure {
   margin-bottom: 80px;
   background-color: #fff;
   box-shadow: 5px 10px 10px #888888;
-}
-
-figure img {
-  width: 300px;
+  position: relative;
 }
 
 details {
-  margin: 10px 0 0 0;
+  display: block;
+  top: 0;
+  height: 100%;
+  overflow-y: visible;
+  z-index: 1050;
   font-size: 16px;
+  width: 100%;
 }
 
 summary {
-  padding: 20px 0px 10px 0px;
+  display: block;
+  color: white;
+  background-color: rgba(0, 0, 0, 0.8);
+  font-size: 1.25rem;
+  line-height: 1;
+  padding: 0.5em;
+  top: 0;
+  right: 0;
+  cursor: pointer;
+}
+
+details[open] svg.closed {
+  display: none;
+}
+details[open] svg.opened {
+  display: block;
+}
+
+details svg.closed {
+  display: block;
+}
+
+details svg.opened {
+  display: none;
+}
+
+detail details[open] :last-child {
+  background-color: #fff;
+  padding: 1rem;
+}
+
+details[open] summary {
+  top: 0;
+  background-color: rgba(0, 0, 0, 0.8);
+  color: #fff;
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
+  transform-origin: top;
+}
+
+figure img {
+  display: block;
+  margin: 0 auto;
+}
+
+figure details {
+  position: absolute;
+  top: 0;
+  right: 0;
+}
+
+img {
+  max-width: 100%;
 }
 
 table {
@@ -41,6 +94,7 @@ td {
 
 /* animations */
 summary {
+  margin: 0 5px;
   display: flex;
   align-items: center;
 }
@@ -63,6 +117,12 @@ summary::details-marker {
 details summary + div {
   overflow-y: hidden;
   transition: height var(--duration-expand) var(--easing-standard);
+  top: 0;
+  background-color: #fff;
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
+  padding: 1rem;
+  cursor: -webkit-grab;
+  cursor: grab;
 }
 
 /* details marker: an element-version of the ::details-marker pseudo-element */
@@ -107,4 +167,37 @@ details[open] .details-marker.up.closing {
   .details-marker {
     transition: none !important;
   }
+}
+
+summary {
+  box-sizing: border-box;
+  position: absolute;
+}
+
+details:not(.dragging) {
+  transition: top 195ms cubic-bezier(0, 0, 0.2, 1),
+    left 195ms cubic-bezier(0, 0, 0.2, 1);
+}
+
+/* when using a mouse, show the summary on figure-hover (hide by default) */
+@media (pointer: fine) {
+  summary {
+    color: transparent;
+    background-color: transparent;
+  }
+  figure:hover summary {
+    color: white;
+    background-color: rgba(0, 0, 0, 0.8);
+  }
+}
+
+summary .fas {
+  float: right;
+}
+
+summary:focus {
+  outline: none;
+  color: #fff;
+  background-color: rgba(0, 0, 0, 0.8);
+  box-shadow: 0 0 1px 3px rgba(59, 153, 252, 0.65);
 }
