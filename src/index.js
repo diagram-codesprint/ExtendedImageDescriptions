@@ -4,6 +4,7 @@ import {
   drag,
   dragend,
   click,
+  keydown,
 } from './internal/handlers';
 import {
   addDefaultSummary,
@@ -30,6 +31,7 @@ export default class Detailed {
     this.dragendHandler = dragend.bind(this);
     this.dragHandler = drag.bind(this);
     this.clickHandler = click.bind(this);
+    this.keydownHandler = keydown.bind(this);
 
     instances.add(this);
   }
@@ -62,6 +64,7 @@ export default class Detailed {
       this.details.addEventListener('dragstart', this.dragstartHandler);
       this.details.addEventListener('dragend', this.dragendHandler);
       this.details.addEventListener('drag', this.dragHandler);
+      this.summary.addEventListener('keydown', this.keydownHandler);
       this.img.addEventListener('click', this.clickHandler);
       this.enabled = true;
     }
@@ -87,6 +90,10 @@ export default class Detailed {
 
   get copyAlt() {
     return !(this.details.getAttribute('data-noalt') !== null || this.options.noalt);
+  }
+
+  get open() {
+    return this.details.open;
   }
 
   get isValid() {

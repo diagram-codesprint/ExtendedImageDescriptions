@@ -822,7 +822,55 @@
   }
   function click() {
     if (!this.open) {
-      this.summary.classList.toggle('EIDactive');
+      this.summary.classList.toggle('detailed-active');
+    }
+  }
+
+  function incrementPixelVal(position) {
+    var positionValue = parseInt(position || 0, 10);
+    positionValue += 5;
+    return positionValue;
+  }
+
+  function decrementPixelVal(position) {
+    var positionValue = parseInt(position || 0, 10);
+    positionValue -= 5;
+    return positionValue;
+  }
+
+  function keydown(e) {
+    if (this.open) {
+      // TODO: Add check to ensure element doesn't go beyond right border
+      if (e.key === 'ArrowRight') {
+        e.preventDefault();
+        var incX = incrementPixelVal(this.details.style.left);
+        this.details.style.left = "".concat(incX, "px");
+      }
+
+      if (e.key === 'ArrowLeft') {
+        e.preventDefault();
+        var decX = decrementPixelVal(this.details.style.left);
+
+        if ((parseInt(decX, 10) || 0) > 0) {
+          this.details.style.left = "".concat(decX, "px");
+        }
+      }
+
+      if (e.key === 'ArrowUp') {
+        e.preventDefault();
+        var decY = decrementPixelVal(this.details.style.top);
+
+        if ((parseInt(decY, 10) || 0) > 0) {
+          this.details.style.top = "".concat(decY, "px");
+        }
+      } // TODO: Add check to ensure element doesn't go beyond bottom border
+
+
+      if (e.key === 'ArrowDown') {
+        e.preventDefault();
+        var incY = incrementPixelVal(this.details.style.top);
+        this.details.style.top = "".concat(incY, "px");
+      }
     }
   }
 
@@ -881,6 +929,7 @@
       this.dragendHandler = dragend.bind(this);
       this.dragHandler = drag.bind(this);
       this.clickHandler = click.bind(this);
+      this.keydownHandler = keydown.bind(this);
       instances$1.add(this);
     } // INSTANCE METHODS
 
@@ -909,6 +958,7 @@
           this.details.addEventListener('dragstart', this.dragstartHandler);
           this.details.addEventListener('dragend', this.dragendHandler);
           this.details.addEventListener('drag', this.dragHandler);
+          this.summary.addEventListener('keydown', this.keydownHandler);
           this.img.addEventListener('click', this.clickHandler);
           this.enabled = true;
         }
@@ -938,6 +988,11 @@
       key: "copyAlt",
       get: function get() {
         return !(this.details.getAttribute('data-noalt') !== null || this.options.noalt);
+      }
+    }, {
+      key: "open",
+      get: function get() {
+        return this.details.open;
       }
     }, {
       key: "isValid",
