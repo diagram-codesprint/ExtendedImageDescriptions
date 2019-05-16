@@ -30,7 +30,7 @@ export default class Detailed {
       this.details.addEventListener('dragstart', this.dragstartHandler);
       this.details.addEventListener('dragend', this.dragendHandler);
       this.details.addEventListener('drag', this.dragHandler);
-      this.details.addEventListener('click',this.clickHandler);
+      this.img.addEventListener('click',this.clickHandler);
       this.enabled = true;
     }
     return this;
