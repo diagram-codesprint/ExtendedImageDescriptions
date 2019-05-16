@@ -125,22 +125,22 @@ summary::details-marker {
   cursor: grab;
 }
 
-[data-position~="top"] summary {
+[data-position~="top"]:not([open]) summary {
   top: 0;
   bottom: unset;
 }
 
-[data-position~="bottom"] summary {
+[data-position~="bottom"]:not([open]) summary {
   top: unset;
   bottom: 0;
 }
 
-[data-position~="right"] summary {
+[data-position~="right"]:not([open]) summary {
   right: 0;
   left: unset;
 }
 
-[data-position~="left"] summary {
+[data-position~="left"]:not([open]) summary {
   right: unset;
   left: 0;
 }
