@@ -874,6 +874,14 @@
     }
   }
 
+  var templateTag = function templateTag(strings) {
+    var template = document.createElement('template');
+    template.innerHTML = strings.trim();
+    return document.importNode(template.content, true);
+  };
+
+  var openIcon = "\n<svg class=\"details-marker closed\" aria-hidden=\"true\" role=\"img\" xmlns=\"http://www.w3.org/2000/svg\" viewbox=\"0 0 512 512\">\n  <!-- fontawesome's info-circle icon: https://fontawesome.com/license-->\n  <path fill=\"currentColor\" d=\"M256 8C119.043 8 8 119.083 8 256c0 136.997 111.043 248 248 248s248-111.003 248-248C504 119.083 392.957 8 256 8zm0 110c23.196 0 42 18.804 42 42s-18.804 42-42 42-42-18.804-42-42 18.804-42 42-42zm56 254c0 6.627-5.373 12-12 12h-88c-6.627 0-12-5.373-12-12v-24c0-6.627 5.373-12 12-12h12v-64h-12c-6.627 0-12-5.373-12-12v-24c0-6.627 5.373-12 12-12h64c6.627 0 12 5.373 12 12v100h12c6.627 0 12 5.373 12 12v24z\"/>\n</svg>\n";
+  var closeIcon = "\n<svg class=\"details-marker opened\" aria-hidden=\"true\" role=\"img\" xmlns=\"http://www.w3.org/2000/svg\" viewbox=\"0 0 512 512\">\n  <!-- fontawesome's fa-times-circle icon: https://fontawesome.com/license-->\n  <path fill=\"currentColor\" d=\"M256 8C119 8 8 119 8 256s111 248 248 248 248-111 248-248S393 8 256 8zm121.6 313.1c4.7 4.7 4.7 12.3 0 17L338 377.6c-4.7 4.7-12.3 4.7-17 0L256 312l-65.1 65.6c-4.7 4.7-12.3 4.7-17 0L134.4 338c-4.7-4.7-4.7-12.3 0-17l65.6-65-65.6-65.1c-4.7-4.7-4.7-12.3 0-17l39.6-39.6c4.7-4.7 12.3-4.7 17 0l65 65.7 65.1-65.6c4.7-4.7 12.3-4.7 17 0l39.6 39.6c4.7 4.7 4.7 12.3 0 17L312 256l65.6 65.1z\"/>\n</svg>\n";
   function addAltText() {
     var altTextEl = document.createElement('p');
     altTextEl.textContent = this.alt;
@@ -884,6 +892,8 @@
   function addDefaultSummary() {
     var summary = document.createElement('summary');
     summary.setAttribute('title', 'More Information');
+    summary.appendChild(templateTag(openIcon));
+    summary.appendChild(templateTag(closeIcon));
     this.details.insertBefore(summary, this.details.firstChild);
     return this;
   }
@@ -938,6 +948,7 @@
       key: "enable",
       value: function enable() {
         if (!this.img) {
+          // eslint-disable-next-line no-console
           console.warn('No related image found.\n' + 'Associate an <img> with your <details> via aria-details.', this.details);
           return this;
         }
