@@ -40,7 +40,7 @@ export function keydown(e) {
     if (e.key === 'ArrowLeft') {
       e.preventDefault();
       const decX = decrementPixelVal(this.details.style.left);
-      if ((parseInt(decX, 10) || 0) > 0) {
+      if ((parseInt(decX, 10) || 0) > -1) {
         this.details.style.left = `${decX}px`;
       }
     }
@@ -48,7 +48,7 @@ export function keydown(e) {
     if (e.key === 'ArrowUp') {
       e.preventDefault();
       const decY = decrementPixelVal(this.details.style.top);
-      if ((parseInt(decY, 10) || 0) > 0) {
+      if ((parseInt(decY, 10) || 0) > -1) {
         this.details.style.top = `${decY}px`;
       }
     }
