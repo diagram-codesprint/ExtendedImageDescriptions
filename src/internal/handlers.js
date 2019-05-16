@@ -1,19 +1,35 @@
-export function dragstart() {
-  this.dragging = true;
+export function dragstart(e) {
+  this.details.classList.add('detailed-dragging');
+  const { screenY, screenX } = ('touches' in e) ? e.touches[0] : e;
+  this.prevPos = { screenY, screenX };
 }
 
 export function drag(e) {
-  console.log(e);
+  if (this.dragging) {
+    const { screenY, screenX } = ('touches' in e) ? e.touches[0] : e;
+    this.pos = {
+      top: this.pos.top + (screenY - this.prevPos.screenY),
+      left: this.pos.left + (screenX - this.prevPos.screenX),
+    };
+    this.prevPos = { screenY, screenX };
+  }
 }
 
 export function dragend() {
-  this.dragging = false;
+  this.details.classList.remove('detailed-dragging');
 }
 
 export function click() {
   if (!this.open) {
     this.summary.classList.toggle('detailed-active');
   }
+}
+
+export function closeend() {
+  this.pos = {
+    top: 0,
+    left: 0,
+  };
 }
 
 function incrementPixelVal(position) {

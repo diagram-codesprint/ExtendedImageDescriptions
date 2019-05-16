@@ -5,6 +5,7 @@ import {
   dragend,
   click,
   keydown,
+  closeend,
 } from './internal/handlers';
 import {
   addDefaultSummary,
@@ -32,6 +33,7 @@ export default class Detailed {
     this.dragHandler = drag.bind(this);
     this.clickHandler = click.bind(this);
     this.keydownHandler = keydown.bind(this);
+    this.closeendHandler = closeend.bind(this);
 
     instances.add(this);
   }
@@ -40,6 +42,7 @@ export default class Detailed {
 
   enable() {
     if (!this.img) {
+      // eslint-disable-next-line no-console
       console.warn(
         'No related image found.\n'
         + 'Associate an <img> with your <details> via aria-details.',
@@ -52,8 +55,8 @@ export default class Detailed {
       if (!this.summary) {
         addDefaultSummary.call(this);
       }
-      describeSummary.call(this);
 
+      describeSummary.call(this);
       createContents.call(this);
 
       if (this.copyAlt) {
@@ -61,9 +64,10 @@ export default class Detailed {
       }
 
       this.transitionHandler.enable().bindTo('.details-marker');
-      this.details.addEventListener('dragstart', this.dragstartHandler);
-      this.details.addEventListener('dragend', this.dragendHandler);
-      this.details.addEventListener('drag', this.dragHandler);
+      this.contents.addEventListener('mousedown', this.dragstartHandler);
+      document.addEventListener('mouseup', this.dragendHandler);
+      document.addEventListener('mousemove', this.dragHandler);
+      this.details.addEventListener('closeend', this.closeendHandler);
       this.summary.addEventListener('keydown', this.keydownHandler);
       this.img.addEventListener('click', this.clickHandler);
       this.enabled = true;
@@ -96,6 +100,10 @@ export default class Detailed {
     return this.details.open;
   }
 
+  get dragging() {
+    return this.details.classList.contains('detailed-dragging');
+  }
+
   get isValid() {
     return Boolean(this.img);
   }
@@ -114,6 +122,18 @@ export default class Detailed {
 
   get summary() {
     return this.details.querySelector('summary');
+  }
+
+  get pos() {
+    const style = getComputedStyle(this.details);
+    const top = parseInt(style.top, 10);
+    const left = parseInt(style.left, 10);
+    return { top, left };
+  }
+
+  set pos({ top, left }) {
+    this.details.style.top = `${top}px`;
+    this.details.style.left = `${left}px`;
   }
 
   // STATIC METHODS (PRIMARY API)
