@@ -46,8 +46,9 @@
   "module": "src/index.js",
   "scripts": {
     "build": "npm run build:umd",
+    "build:examples": "rollup src/index.js --file examples/eid.js --format umd --name ExtendedImageDescriptions",
     "build:umd": "rollup src/index.js --file dist/index.js --format umd --name ExtendedImageDescriptions",
-    "dev": "npm run build:umd -- --watch",
+    "dev": "npm run build:examples -- --watch",
     "lint": "eslint .",
     "test": "nyc ava"
   },
