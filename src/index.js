@@ -1,5 +1,10 @@
 import DetailsTransition from './internal/transitionHandler';
-import { dragstart, drag, dragend, click } from './internal/dragHandlers';
+import {
+  dragstart,
+  drag,
+  dragend,
+  click,
+} from './internal/handlers';
 
 const Defaults = {
   selector: 'figure>details',
