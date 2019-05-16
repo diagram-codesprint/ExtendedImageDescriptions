@@ -32,48 +32,36 @@ export function closeend() {
   };
 }
 
-function incrementPixelVal(position) {
-  let positionValue = parseInt(position || 0, 10);
-  positionValue += 5;
-  return positionValue;
-}
-
-function decrementPixelVal(position) {
-  let positionValue = parseInt(position || 0, 10);
-  positionValue -= 5;
-  return positionValue;
-}
+const stepBase = 5;
 
 export function keydown(e) {
   if (this.open) {
+    const mod = (e.altKey) ? 10 : 1;
+    const step = stepBase * mod;
     // TODO: Add check to ensure element doesn't go beyond right border
     if (e.key === 'ArrowRight') {
       e.preventDefault();
-      const incX = incrementPixelVal(this.details.style.left);
-      this.details.style.left = `${incX}px`;
+      const change = parseInt(this.details.style.left || 0, 10) + step;
+      this.details.style.left = `${change}px`;
     }
 
     if (e.key === 'ArrowLeft') {
       e.preventDefault();
-      const decX = decrementPixelVal(this.details.style.left);
-      if ((parseInt(decX, 10) || 0) > -1) {
-        this.details.style.left = `${decX}px`;
-      }
+      const change = parseInt(this.details.style.left || 0, 10) - step;
+      this.details.style.left = `${change}px`;
     }
 
     if (e.key === 'ArrowUp') {
       e.preventDefault();
-      const decY = decrementPixelVal(this.details.style.top);
-      if ((parseInt(decY, 10) || 0) > -1) {
-        this.details.style.top = `${decY}px`;
-      }
+      const change = parseInt(this.details.style.top || 0, 10) - step;
+      this.details.style.top = `${change}px`;
     }
 
     // TODO: Add check to ensure element doesn't go beyond bottom border
     if (e.key === 'ArrowDown') {
       e.preventDefault();
-      const incY = incrementPixelVal(this.details.style.top);
-      this.details.style.top = `${incY}px`;
+      const change = parseInt(this.details.style.top || 0, 10) + step;
+      this.details.style.top = `${change}px`;
     }
   }
 }
