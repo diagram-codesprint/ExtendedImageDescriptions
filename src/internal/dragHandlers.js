@@ -6,10 +6,12 @@ export function drag(e) {
   console.log(e);
 }
 
-export function dragend(e) {
+export function dragend() {
   this.dragging = false;
 }
-export function click(e) {
-  this.classList.toggle("EIDactive");
+
+export function click() {
+  if (!this.open) {
+    this.summary.classList.toggle('EIDactive');
+  }
 }
-  
