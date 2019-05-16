@@ -125,6 +125,26 @@ details summary + div {
   cursor: grab;
 }
 
+[data-position~="top"] summary {
+  top: 0;
+  bottom: unset;
+}
+
+[data-position~="bottom"] summary {
+  top: unset;
+  bottom: 0;
+}
+
+[data-position~="right"] summary {
+  right: 0;
+  left: unset;
+}
+
+[data-position~="left"] summary {
+  right: unset;
+  left: 0;
+}
+
 /* details marker: an element-version of the ::details-marker pseudo-element */
 
 .details-marker {
