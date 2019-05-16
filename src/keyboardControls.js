@@ -7,14 +7,14 @@ function dragDetails(e) {
     }
     if (e.key === 'ArrowLeft') {
       const decX = decrementPixelVal(this.style.left);
-      if ((parseInt(this.style.left) || 0) > 0) {
+      if ((parseInt(decX) || 0) > 0) {
         this.style.left = `${decX}px`;
       }
     }
 
     if (e.key === 'ArrowUp') {
       const decY = decrementPixelVal(this.style.top);
-      if ((parseInt(this.style.top) || 0) > 0) {
+      if ((parseInt(decY) || 0) > 0) {
         this.style.top = `${decY}px`;
       }
     }
