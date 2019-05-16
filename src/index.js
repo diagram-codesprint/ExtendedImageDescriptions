@@ -17,7 +17,7 @@ export default class Detailed {
     this.dragstartHandler = dragstart.bind(this);
     this.dragendHandler = dragend.bind(this);
     this.dragHandler = drag.bind(this);
-    this.clickHandler=click.bind(this);
+    this.clickHandler = click.bind(this);
 
     instances.add(this);
   }
@@ -25,12 +25,12 @@ export default class Detailed {
   // INSTANCE METHODS
 
   enable() {
-    if (!this.enabled) {
+    if (!this.enabled && this.isValid) {
       this.transitionHandler.enable();
       this.details.addEventListener('dragstart', this.dragstartHandler);
       this.details.addEventListener('dragend', this.dragendHandler);
       this.details.addEventListener('drag', this.dragHandler);
-      this.img.addEventListener('click',this.clickHandler);
+      this.img.addEventListener('click', this.clickHandler);
       this.enabled = true;
     }
     return this;
@@ -53,12 +53,16 @@ export default class Detailed {
 
   // PROPERTIES
 
+  get isValid() {
+    return Boolean(this.img);
+  }
+
   get id() {
     return this.details.id;
   }
 
   get img() {
-    return document.querySelector(`img[aria-details=${this.id}]`);
+    return document.querySelector(`img[aria-details="${this.id}"]`);
   }
 
   get alt() {
