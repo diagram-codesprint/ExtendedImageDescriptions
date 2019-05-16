@@ -31,7 +31,7 @@ export default class Detailed {
 
   enable() {
     if (!this.enabled && this.isValid) {
-      this.transitionHandler.enable();
+      this.transitionHandler.enable().bindTo('.details-marker');
       this.details.addEventListener('dragstart', this.dragstartHandler);
       this.details.addEventListener('dragend', this.dragendHandler);
       this.details.addEventListener('drag', this.dragHandler);
