@@ -41,8 +41,8 @@
         aria-details="ext1"
       />
       <details id="ext1">
-        <summary>
-         title="More information"><i class="fas fa-cat"></i>
+        <summary title="More information">
+         <i class="fas fa-cat"></i>
         </summary>
         <div>
           A diagram shows properties for the element Chlorine from the periodic
@@ -393,6 +393,7 @@
     </figure>
 
     <h3>Bar graph vertical</h3>
+    <h4>Alt text not added to description, by markup.</h4>
     <figure>
       <img
         src="images/specific20thumb.png"
@@ -937,12 +938,14 @@
     </template>
 
     <script>
+      /*
       const template = document.getElementById('chevron');
       const summaries = document.querySelectorAll('summary');
       summaries.forEach((s) => {
         const clone = document.importNode(template.content, true);
         s.insertBefore(clone, s.firstChild);
       });
+      */
       ExtendedImageDescriptions.enhanceAll();
     </script>
   </body>
