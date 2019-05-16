@@ -811,19 +811,47 @@
     return DetailsTransition;
   }();
 
-  function dragstart() {
-    this.dragging = true;
+  function dragstart(e) {
+    this.details.classList.add('detailed-dragging');
+
+    var _ref = 'touches' in e ? e.touches[0] : e,
+        screenY = _ref.screenY,
+        screenX = _ref.screenX;
+
+    this.prevPos = {
+      screenY: screenY,
+      screenX: screenX
+    };
   }
   function drag(e) {
-    console.log(e);
+    if (this.dragging) {
+      var _ref2 = 'touches' in e ? e.touches[0] : e,
+          screenY = _ref2.screenY,
+          screenX = _ref2.screenX;
+
+      this.pos = {
+        top: this.pos.top + (screenY - this.prevPos.screenY),
+        left: this.pos.left + (screenX - this.prevPos.screenX)
+      };
+      this.prevPos = {
+        screenY: screenY,
+        screenX: screenX
+      };
+    }
   }
   function dragend() {
-    this.dragging = false;
+    this.details.classList.remove('detailed-dragging');
   }
   function click() {
     if (!this.open) {
       this.summary.classList.toggle('detailed-active');
     }
+  }
+  function closeend() {
+    this.pos = {
+      top: 0,
+      left: 0
+    };
   }
 
   function incrementPixelVal(position) {
@@ -851,7 +879,7 @@
         e.preventDefault();
         var decX = decrementPixelVal(this.details.style.left);
 
-        if ((parseInt(decX, 10) || 0) > 0) {
+        if ((parseInt(decX, 10) || 0) > -1) {
           this.details.style.left = "".concat(decX, "px");
         }
       }
@@ -860,7 +888,7 @@
         e.preventDefault();
         var decY = decrementPixelVal(this.details.style.top);
 
-        if ((parseInt(decY, 10) || 0) > 0) {
+        if ((parseInt(decY, 10) || 0) > -1) {
           this.details.style.top = "".concat(decY, "px");
         }
       } // TODO: Add check to ensure element doesn't go beyond bottom border
@@ -940,6 +968,7 @@
       this.dragHandler = drag.bind(this);
       this.clickHandler = click.bind(this);
       this.keydownHandler = keydown.bind(this);
+      this.closeendHandler = closeend.bind(this);
       instances$1.add(this);
     } // INSTANCE METHODS
 
@@ -966,9 +995,10 @@
           }
 
           this.transitionHandler.enable().bindTo('.details-marker');
-          this.details.addEventListener('dragstart', this.dragstartHandler);
-          this.details.addEventListener('dragend', this.dragendHandler);
-          this.details.addEventListener('drag', this.dragHandler);
+          this.contents.addEventListener('mousedown', this.dragstartHandler);
+          document.addEventListener('mouseup', this.dragendHandler);
+          document.addEventListener('mousemove', this.dragHandler);
+          this.details.addEventListener('closeend', this.closeendHandler);
           this.summary.addEventListener('keydown', this.keydownHandler);
           this.img.addEventListener('click', this.clickHandler);
           this.enabled = true;
@@ -1006,6 +1036,11 @@
         return this.details.open;
       }
     }, {
+      key: "dragging",
+      get: function get() {
+        return this.details.classList.contains('detailed-dragging');
+      }
+    }, {
       key: "isValid",
       get: function get() {
         return Boolean(this.img);
@@ -1029,6 +1064,23 @@
       key: "summary",
       get: function get() {
         return this.details.querySelector('summary');
+      }
+    }, {
+      key: "pos",
+      get: function get() {
+        var style = getComputedStyle(this.details);
+        var top = parseInt(style.top, 10);
+        var left = parseInt(style.left, 10);
+        return {
+          top: top,
+          left: left
+        };
+      },
+      set: function set(_ref) {
+        var top = _ref.top,
+            left = _ref.left;
+        this.details.style.top = "".concat(top, "px");
+        this.details.style.left = "".concat(left, "px");
       } // STATIC METHODS (PRIMARY API)
 
     }], [{
