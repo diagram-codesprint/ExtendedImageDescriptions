@@ -853,51 +853,41 @@
       left: 0
     };
   }
-
-  function incrementPixelVal(position) {
-    var positionValue = parseInt(position || 0, 10);
-    positionValue += 5;
-    return positionValue;
-  }
-
-  function decrementPixelVal(position) {
-    var positionValue = parseInt(position || 0, 10);
-    positionValue -= 5;
-    return positionValue;
-  }
-
+  var stepBase = 5;
   function keydown(e) {
     if (this.open) {
-      // TODO: Add check to ensure element doesn't go beyond right border
+      var mod = e.altKey ? 10 : 1;
+      var step = stepBase * mod; // TODO: Add check to ensure element doesn't go beyond right border
+
       if (e.key === 'ArrowRight') {
         e.preventDefault();
-        var incX = incrementPixelVal(this.details.style.left);
-        this.details.style.left = "".concat(incX, "px");
+        var change = parseInt(this.details.style.left || 0, 10) + step;
+        this.details.style.left = "".concat(change, "px");
       }
 
       if (e.key === 'ArrowLeft') {
         e.preventDefault();
-        var decX = decrementPixelVal(this.details.style.left);
 
-        if ((parseInt(decX, 10) || 0) > -1) {
-          this.details.style.left = "".concat(decX, "px");
-        }
+        var _change = parseInt(this.details.style.left || 0, 10) - step;
+
+        this.details.style.left = "".concat(_change, "px");
       }
 
       if (e.key === 'ArrowUp') {
         e.preventDefault();
-        var decY = decrementPixelVal(this.details.style.top);
 
-        if ((parseInt(decY, 10) || 0) > -1) {
-          this.details.style.top = "".concat(decY, "px");
-        }
+        var _change2 = parseInt(this.details.style.top || 0, 10) - step;
+
+        this.details.style.top = "".concat(_change2, "px");
       } // TODO: Add check to ensure element doesn't go beyond bottom border
 
 
       if (e.key === 'ArrowDown') {
         e.preventDefault();
-        var incY = incrementPixelVal(this.details.style.top);
-        this.details.style.top = "".concat(incY, "px");
+
+        var _change3 = parseInt(this.details.style.top || 0, 10) + step;
+
+        this.details.style.top = "".concat(_change3, "px");
       }
     }
   }
@@ -919,7 +909,6 @@
   }
   function addDefaultSummary() {
     var summary = document.createElement('summary');
-    summary.setAttribute('title', 'More Information');
     summary.appendChild(templateTag(openIcon));
     summary.appendChild(templateTag(closeIcon));
     this.details.insertBefore(summary, this.details.firstChild);
@@ -931,6 +920,10 @@
     }
 
     this.summary.setAttribute('aria-describedby', this.img.id);
+    var title = 'More information';
+    var label = this.hasContents ? title : "".concat(title, " (no long description available)");
+    this.summary.setAttribute('title', title);
+    this.summary.setAttribute('aria-label', label);
     return this;
   }
   function createContents() {
@@ -987,6 +980,7 @@
             addDefaultSummary.call(this);
           }
 
+          this.hasContents = this.details.lastElementChild !== this.summary;
           describeSummary.call(this);
           createContents.call(this);
 

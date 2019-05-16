@@ -28,7 +28,6 @@ export function addAltText() {
 
 export function addDefaultSummary() {
   const summary = document.createElement('summary');
-  summary.setAttribute('title', 'More Information');
   summary.appendChild(templateTag(openIcon));
   summary.appendChild(templateTag(closeIcon));
   this.details.insertBefore(summary, this.details.firstChild);
@@ -40,6 +39,10 @@ export function describeSummary() {
     this.img.setAttribute('id', `detailed-img-${this.id}`);
   }
   this.summary.setAttribute('aria-describedby', this.img.id);
+  const title = 'More information';
+  const label = (this.hasContents) ? title : `${title} (no long description available)`;
+  this.summary.setAttribute('title', title);
+  this.summary.setAttribute('aria-label', label);
   return this;
 }
 
