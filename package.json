@@ -46,16 +46,24 @@
   "module": "src/index.js",
   "scripts": {
     "build": "npm run build:umd",
-    "build:examples": "rollup src/index.js --file examples/eid.js --format umd --name ExtendedImageDescriptions",
-    "build:umd": "rollup src/index.js --file dist/index.js --format umd --name ExtendedImageDescriptions",
+    "build:examples": "npm run build:umd -- --file examples/eid.js",
+    "build:umd": "rollup -c",
     "dev": "npm run build:examples -- --watch",
     "lint": "eslint .",
     "test": "nyc ava"
   },
   "devDependencies": {
+    "@babel/core": "^7.4.4",
+    "babel-preset-airbnb": "^3.2.1",
     "eslint": "^5.3.0",
     "eslint-config-airbnb-base": "^13.1.0",
     "eslint-plugin-import": "^2.17.2",
-    "rollup": "^1.11.3"
+    "rollup": "^1.12.1",
+    "rollup-plugin-babel": "^4.3.2",
+    "rollup-plugin-commonjs": "^10.0.0",
+    "rollup-plugin-node-resolve": "^5.0.0"
+  },
+  "dependencies": {
+    "lodash.debounce": "^4.0.8"
   }
 }
