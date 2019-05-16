@@ -1,5 +1,5 @@
 import DetailsTransition from './internal/transitionHandler';
-import { dragstart, drag, dragend } from './internal/dragHandlers';
+import { dragstart, drag, dragend, click } from './internal/dragHandlers';
 
 const Defaults = {
   selector: 'figure>details',
@@ -17,6 +17,7 @@ export default class Detailed {
     this.dragstartHandler = dragstart.bind(this);
     this.dragendHandler = dragend.bind(this);
     this.dragHandler = drag.bind(this);
+    this.clickHandler=click.bind(this);
 
     instances.add(this);
   }
@@ -29,7 +30,7 @@ export default class Detailed {
       this.details.addEventListener('dragstart', this.dragstartHandler);
       this.details.addEventListener('dragend', this.dragendHandler);
       this.details.addEventListener('drag', this.dragHandler);
-
+      this.details.addEventListener('click',this.clickHandler);
       this.enabled = true;
     }
     return this;
