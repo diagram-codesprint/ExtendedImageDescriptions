@@ -5,9 +5,16 @@ import {
   dragend,
   click,
 } from './internal/handlers';
+import {
+  addDefaultSummary,
+  describeSummary,
+  addAltText,
+  createContents,
+} from './internal/populateDetails';
 
 const Defaults = {
   selector: 'figure>details',
+  noalt: false,
 };
 
 const instances = new Set();
@@ -30,7 +37,27 @@ export default class Detailed {
   // INSTANCE METHODS
 
   enable() {
-    if (!this.enabled && this.isValid) {
+    if (!this.img) {
+      console.warn(
+        'No related image found.\n'
+        + 'Associate an <img> with your <details> via aria-details.',
+        this.details,
+      );
+      return this;
+    }
+
+    if (!this.enabled) {
+      if (!this.summary) {
+        addDefaultSummary.call(this);
+      }
+      describeSummary.call(this);
+
+      createContents.call(this);
+
+      if (this.copyAlt) {
+        addAltText.call(this);
+      }
+
       this.transitionHandler.enable().bindTo('.details-marker');
       this.details.addEventListener('dragstart', this.dragstartHandler);
       this.details.addEventListener('dragend', this.dragendHandler);
@@ -57,6 +84,10 @@ export default class Detailed {
   }
 
   // PROPERTIES
+
+  get copyAlt() {
+    return !(this.details.getAttribute('data-noalt') !== null || this.options.noalt);
+  }
 
   get isValid() {
     return Boolean(this.img);
