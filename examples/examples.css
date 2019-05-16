@@ -1,0 +1,10 @@
+figure {
+    padding: 20px;
+    
+    width: 300px;
+    margin-bottom: 80px;
+}
+
+figure img {
+    width: 300px;
+}
