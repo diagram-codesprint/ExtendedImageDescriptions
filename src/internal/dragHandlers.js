@@ -9,3 +9,7 @@ export function drag(e) {
 export function dragend(e) {
   this.dragging = false;
 }
+export function click(e) {
+  this.classList.toggle("EIDactive");
+}
+  
