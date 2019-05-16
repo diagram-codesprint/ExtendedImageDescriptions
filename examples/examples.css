@@ -1,3 +1,9 @@
+:root {
+  --duration-expand: 300ms;
+  --duration-collapse: 250ms;
+  --easing-standard: cubic-bezier(0.4, 0, 0.2, 1);
+}
+
 body {
     font-family: sans-serif;
     padding: 20px 0 20px 50px;
@@ -31,4 +37,63 @@ table {
 
 td {
     padding: 2px;
+}
+
+/* animations */
+summary {
+	display: flex;
+	align-items: center;
+}
+
+summary.dm-right {
+  justify-content: space-between;
+}
+
+details summary + div {
+	overflow-y: hidden;
+	transition: height var(--duration-expand) var(--easing-standard);
+}
+
+/* details marker: an element-version of the ::details-marker pseudo-element */
+
+.details-marker {
+	width: 1em;
+	height: 1em;
+	transition: transform var(--duration-expand) var(--easing-standard);
+	transform-origin: center;
+}
+
+.details-marker.right {
+	transform: rotate(90deg);
+}
+
+details[open] summary + div {
+  transition: height var(--duration-collapse) var(--easing-standard);
+}
+
+details[open]	.details-marker {
+		transition: transform var(--duration-collapse) var(--easing-standard);
+	}
+
+details[open] .details-marker.right {
+  transform: rotate(180deg);
+}
+
+details[open] .details-marker.right.closing {
+  transform: rotate(90deg);
+}
+
+details[open] .details-marker.up {
+  transform: rotate3d(1, 0, 0, 180deg);
+}
+
+details[open] .details-marker.up.closing {
+  transform: rotate3d(1, 0, 0, 0);
+}
+
+@media screen and (prefers-reduced-motion: reduce) {
+	details summary + div,
+	.details-marker {
+		transition: none !important;
+	}
 }
