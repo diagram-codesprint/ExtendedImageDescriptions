@@ -1,5 +1,3 @@
-import Detailed from './index';
-
 export function createAltText() {
   const altTextEl = document.createElement('p');
   altTextEl.textContent = this.alt;
@@ -8,7 +6,7 @@ export function createAltText() {
 
 export function addDefaultSummary() {
   if (this.summary === null) {
-    const summary = createElement('summary');
+    const summary = document.createElement('summary');
     summary.setAttribute('title', 'More Information');
     this.details.insertBefore(summary, this.child.firstChild);
   }
