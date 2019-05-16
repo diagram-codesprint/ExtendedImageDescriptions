@@ -5,44 +5,44 @@
 }
 
 body {
-    font-family: sans-serif;
-    padding: 20px 0 20px 50px;
-    background-color: #CCC;
+  font-family: sans-serif;
+  padding: 20px 0 20px 50px;
+  background-color: #ccc;
 }
 
 figure {
-    padding: 20px;
-    width: 600px;
-    margin-bottom: 80px;
-    background-color: #FFF;
-    box-shadow: 5px 10px 10px #888888;
+  padding: 20px;
+  width: 600px;
+  margin-bottom: 80px;
+  background-color: #fff;
+  box-shadow: 5px 10px 10px #888888;
 }
 
 figure img {
-    width: 300px;
+  width: 300px;
 }
 
 details {
-    margin: 10px 0 0 0;
-    font-size: 16px;
+  margin: 10px 0 0 0;
+  font-size: 16px;
 }
 
 summary {
-    padding: 20px 0px 10px 0px;
+  padding: 20px 0px 10px 0px;
 }
 
 table {
-    border: 1px solid #999;
+  border: 1px solid #999;
 }
 
 td {
-    padding: 2px;
+  padding: 2px;
 }
 
 /* animations */
 summary {
-	display: flex;
-	align-items: center;
+  display: flex;
+  align-items: center;
 }
 
 summary.dm-right {
@@ -50,30 +50,30 @@ summary.dm-right {
 }
 
 details summary + div {
-	overflow-y: hidden;
-	transition: height var(--duration-expand) var(--easing-standard);
+  overflow-y: hidden;
+  transition: height var(--duration-expand) var(--easing-standard);
 }
 
 /* details marker: an element-version of the ::details-marker pseudo-element */
 
 .details-marker {
-	width: 1em;
-	height: 1em;
-	transition: transform var(--duration-expand) var(--easing-standard);
-	transform-origin: center;
+  width: 1em;
+  height: 1em;
+  transition: transform var(--duration-expand) var(--easing-standard);
+  transform-origin: center;
 }
 
 .details-marker.right {
-	transform: rotate(90deg);
+  transform: rotate(90deg);
 }
 
 details[open] summary + div {
   transition: height var(--duration-collapse) var(--easing-standard);
 }
 
-details[open]	.details-marker {
-		transition: transform var(--duration-collapse) var(--easing-standard);
-	}
+details[open] .details-marker {
+  transition: transform var(--duration-collapse) var(--easing-standard);
+}
 
 details[open] .details-marker.right {
   transform: rotate(180deg);
@@ -92,8 +92,8 @@ details[open] .details-marker.up.closing {
 }
 
 @media screen and (prefers-reduced-motion: reduce) {
-	details summary + div,
-	.details-marker {
-		transition: none !important;
-	}
+  details summary + div,
+  .details-marker {
+    transition: none !important;
+  }
 }
