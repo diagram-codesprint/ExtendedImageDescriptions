@@ -11,6 +11,7 @@
   <body>
     <h2>Different Types of images</h2>
     <h3>Drawings and Paintings</h3>
+    <h4>Default "summary" (description control)</h4>
     <figure>
       <img
         src="images/specific01thumb.png"
@@ -19,10 +20,6 @@
         aria-details="d-1"
       />
       <details id="d-1">
-        <summary>
-          A painting depicts early Native American farmers working in a big,
-          open field.
-        </summary>
         <div>
           A painting depicts early Native American farmers working in a big,
           open field. There are many men and women, and some children working
@@ -34,16 +31,18 @@
     </figure>
 
     <h3>Chemical Element</h3>
+    <h4>user-specified icon for "summary" control</h4>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css" integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
     <figure>
       <img
         src="images/specific04thumb.png"
         alt="properties for the element Chlorine from the periodic table of elements"
         width="300"
+        aria-details="ext1"
       />
-      <details>
+      <details id="ext1">
         <summary>
-          properties for the element Chlorine from the periodic table of
-          elements
+         title="More information"><i class="fas fa-cat"></i>
         </summary>
         <div>
           A diagram shows properties for the element Chlorine from the periodic
@@ -53,16 +52,18 @@
       </details>
     </figure>
 
-    <h3>Comparing Objectis, Simple</h3>
+    <h3>Comparing Objects, Simple</h3>
+    <h4>Text used as "summary" description control.</h4>
     <figure>
       <img
         src="images/specific05thumb.png"
         alt="Three embryos, a fish, reptile, and bird"
         width="300"
+        aria-details="ext2"
       />
-      <details>
+      <details id="ext2">
         <summary>
-          Three embryos, a fish, reptile, and bird
+          More information
         </summary>
         <div>
           <p>
@@ -95,16 +96,16 @@
     </figure>
 
     <h3>Comparing Objects, complex</h3>
+    <h4>Description shown by default.</h4>
     <figure>
       <img
         src="images/specific06thumb.png"
         alt="illustration showing 10 different finches and their variations"
         width="300"
+        aria-details="ext3"
       />
-      <details>
-        <summary>
-          illustration showing 10 different finches and their variations
-        </summary>
+      <details id="ext3" open>
+
         <div>
           An illustration showing 10 different finches and their variations is
           depicted in the following table.
@@ -191,9 +192,10 @@
     </figure>
 
     <h3>Basic Flowchart</h3>
+    <h4>"summary" control shown at top left.</h4>
     <figure>
-      <img src="images/specific11thumb.png" alt="A flowchart" width="300" />
-      <details>
+      <img src="images/specific11thumb.png" alt="A flowchart" width="300"  aria-details="ext4"/>
+      <details id="ext4" data-position="top left">
         <summary>
           A flowchart
         </summary>
@@ -278,9 +280,10 @@
     </figure>
 
     <h3>Multiple Cycles</h3>
+    <h4>"summary" control shown at bottom left.</h4>
     <figure>
-      <img src="images/specific15thumb.png" alt="The Krebs Cycle" width="300" />
-      <details>
+      <img src="images/specific15thumb.png" alt="The Krebs Cycle" width="300" aria-details="ext6"/>
+      <details id="ext6" data-position="bottom left">
         <summary>
           The Krebs Cycle
         </summary>
@@ -340,13 +343,15 @@
     </figure>
 
     <h3>Insets as Images</h3>
-    <figure>
+    <h4>"summary" control shown at bottom right.</h4>
+    <figure >
       <img
         src="images/specific17thumb.jpg"
         alt="A map highlighting various regions of Kentucky"
         width="300"
+        aria-details="ext7"
       />
-      <details>
+      <details id="ext7" data-position="bottom right">
         <summary>
           A map highlighting various regions of Kentucky
         </summary>
@@ -364,13 +369,15 @@
     </figure>
 
     <h3>Insets as Keys/Legends</h3>
-    <figure>
+    <h4>"summary" control shown at top right, by explicit placement.</h4>
+    <figure >
       <img
         src="images/specific18thumb.jpg"
         alt="A Kentucky land-use map"
         width="300"
+        aria-details="ext8"
       />
-      <details>
+      <details id="ext8" data-position="top right">
         <summary>
           A Kentucky land-use map
         </summary>
@@ -391,8 +398,9 @@
         src="images/specific20thumb.png"
         alt="Figure 1 is a bar graph that measures percentage of vaccination coverage in five states over one year"
         width="300"
+        aria-details="ext9"
       />
-      <details>
+      <details id="ext9">
         <summary>
           Figure 1 is a bar graph that measures percentage of vaccination
           coverage in five states over one year
@@ -497,8 +505,9 @@
         src="images/specific23thumb.png"
         alt="The figure is entitled 'FOREIGN TRADE OF COUNTRY X"
         width="300"
+        aria-details="ext9"
       />
-      <details>
+      <details id="ext9">
         <summary>
           The figure is entitled "FOREIGN TRADE OF COUNTRY X, 1968 through 1980,
           in United States dollars".
@@ -644,13 +653,14 @@
     </figure>
 
     <h3>Pie Graph</h3>
-    <figure>
+    <figure >
       <img
         src="images/specific24thumb.png"
         alt="The figure is a pie graph"
         width="300"
+        aria-details="ext10"
       />
-      <details>
+      <details id="ext10">
         <summary>
           The figure is a pie graph
         </summary>
@@ -712,8 +722,9 @@
         src="images/specific27thumb.png"
         alt="A map of North America with present day borders shows European claims in 1682."
         width="300"
+        aria-details="ext11"
       />
-      <details>
+      <details id="ext11">
         <summary>
           A map of North America with present day borders shows European claims
           in 1682.
@@ -763,8 +774,9 @@
         src="images/specific30thumb.png"
         alt="Diagram of distances from a person to a flag"
         width="300"
+        aria-details="ext12"
       />
-      <details>
+      <details id="ext12">
         <summary>
           Diagram of distances from a person to a flag
         </summary>
@@ -786,8 +798,8 @@
 
     <h3>Timelines</h3>
     <figure>
-      <img src="images/specific36thumb.png" alt="timeline" width="300" />
-      <details>
+      <img src="images/specific36thumb.png" alt="timeline" width="300" aria-details="ext13"/>
+      <details id="ext13">
         <summary>
           Timeline
         </summary>
@@ -802,13 +814,14 @@
 
     <h2>Different types of information</h2>
     <h3>Div within summary</h3>
-    <figure>
+    <figure >
       <img
         src="images/specific01thumb.png"
         alt="A painting depicts early Native American farmers working in a big, open field"
         width="400"
+        aria-details="ext14"
       />
-      <details>
+      <details id="ext14">
         <summary>
           A painting depicts early Native American farmers working in a big,
           open field.
@@ -829,8 +842,9 @@
         src="images/specific01thumb.png"
         alt="A painting depicts early Native American farmers working in a big, open field"
         width="400"
+        aria-details="ext15"
       />
-      <details>
+      <details id="ext15">
         A painting depicts early Native American farmers working in a big, open
         field.
         <div>
@@ -862,15 +876,16 @@
       </div>
     </figure>
 
-    <h3>No Figure Tag, Details and Summary</h3>
+    <h3>No Figure Tag, but does have Details and Summary</h3>
 
     <img
       src="images/specific01thumb.png"
       alt="A painting depicts early Native American farmers working in a big, open field"
-      width="400"
+      width="400" 
+      aria-details="ext16"
     />
 
-    <details>
+    <details id="ext16">
       <summary
         >A painting depicts early Native American farmers working in a big, open
         field.</summary
@@ -886,7 +901,7 @@
 
     <h3>Details before image</h3>
     <figure>
-      <details>
+      <details id="ext17">
         <summary>
           A painting depicts early Native American farmers working in a big,
           open field.
@@ -903,6 +918,7 @@
         src="images/specific01thumb.png"
         alt="A painting depicts early Native American farmers working in a big, open field"
         width="400"
+        aria-details="ext17"
       />
     </figure>
 
