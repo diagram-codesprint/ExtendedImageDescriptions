@@ -1,4 +1,5 @@
 :root {
+  --duration-simple: 100ms;
   --duration-expand: 300ms;
   --duration-collapse: 250ms;
   --easing-standard: cubic-bezier(0.4, 0, 0.2, 1);
@@ -196,8 +197,8 @@ summary {
 }
 
 details:not(.detailed-dragging) {
-  transition: top 195ms var(--easing-standard),
-    left 195ms var(--easing-standard);
+  transition: top var(--duration-simple) var(--easing-standard),
+    left var(--duration-simple) var(--easing-standard);
 }
 
 /* when using a mouse, show the summary on figure-hover (hide by default) */

@@ -549,6 +549,10 @@
 
 
   function summaryClickHandler(e) {
+    if (window.getComputedStyle(this.panel)['transition-property'] === 'none') {
+      return;
+    }
+
     if (this.open) {
       e.preventDefault();
 
@@ -847,11 +851,10 @@
       this.summary.classList.toggle('detailed-active');
     }
   }
-  function closeend() {
-    this.pos = {
-      top: 0,
-      left: 0
-    };
+  function toggle() {
+    if (!this.open) {
+      this.resetPosition();
+    }
   }
   var stepBase = 5;
   function keydown(e) {
@@ -859,23 +862,20 @@
       var mod = e.altKey ? 10 : 1;
       var step = stepBase * mod; // TODO: Add check to ensure element doesn't go beyond right border
 
+      if (e.key.startsWith('Arrow')) e.preventDefault();
+
       if (e.key === 'ArrowRight') {
-        e.preventDefault();
         var change = parseInt(this.details.style.left || 0, 10) + step;
         this.details.style.left = "".concat(change, "px");
       }
 
       if (e.key === 'ArrowLeft') {
-        e.preventDefault();
-
         var _change = parseInt(this.details.style.left || 0, 10) - step;
 
         this.details.style.left = "".concat(_change, "px");
       }
 
       if (e.key === 'ArrowUp') {
-        e.preventDefault();
-
         var _change2 = parseInt(this.details.style.top || 0, 10) - step;
 
         this.details.style.top = "".concat(_change2, "px");
@@ -883,8 +883,6 @@
 
 
       if (e.key === 'ArrowDown') {
-        e.preventDefault();
-
         var _change3 = parseInt(this.details.style.top || 0, 10) + step;
 
         this.details.style.top = "".concat(_change3, "px");
@@ -898,8 +896,8 @@
     return document.importNode(template.content, true);
   };
 
-  var openIcon = "\n<svg class=\"details-marker closed\" aria-hidden=\"true\" role=\"img\" xmlns=\"http://www.w3.org/2000/svg\" viewbox=\"0 0 512 512\">\n  <!-- fontawesome's info-circle icon: https://fontawesome.com/license-->\n  <path fill=\"currentColor\" d=\"M256 8C119.043 8 8 119.083 8 256c0 136.997 111.043 248 248 248s248-111.003 248-248C504 119.083 392.957 8 256 8zm0 110c23.196 0 42 18.804 42 42s-18.804 42-42 42-42-18.804-42-42 18.804-42 42-42zm56 254c0 6.627-5.373 12-12 12h-88c-6.627 0-12-5.373-12-12v-24c0-6.627 5.373-12 12-12h12v-64h-12c-6.627 0-12-5.373-12-12v-24c0-6.627 5.373-12 12-12h64c6.627 0 12 5.373 12 12v100h12c6.627 0 12 5.373 12 12v24z\"/>\n</svg>\n";
-  var closeIcon = "\n<svg class=\"details-marker opened\" aria-hidden=\"true\" role=\"img\" xmlns=\"http://www.w3.org/2000/svg\" viewbox=\"0 0 512 512\">\n  <!-- fontawesome's fa-times-circle icon: https://fontawesome.com/license-->\n  <path fill=\"currentColor\" d=\"M256 8C119 8 8 119 8 256s111 248 248 248 248-111 248-248S393 8 256 8zm121.6 313.1c4.7 4.7 4.7 12.3 0 17L338 377.6c-4.7 4.7-12.3 4.7-17 0L256 312l-65.1 65.6c-4.7 4.7-12.3 4.7-17 0L134.4 338c-4.7-4.7-4.7-12.3 0-17l65.6-65-65.6-65.1c-4.7-4.7-4.7-12.3 0-17l39.6-39.6c4.7-4.7 12.3-4.7 17 0l65 65.7 65.1-65.6c4.7-4.7 12.3-4.7 17 0l39.6 39.6c4.7 4.7 4.7 12.3 0 17L312 256l65.6 65.1z\"/>\n</svg>\n";
+  var openIcon = "\n<svg class=\"detailed-marker closed\" aria-hidden=\"true\" role=\"img\" xmlns=\"http://www.w3.org/2000/svg\" viewbox=\"0 0 512 512\">\n  <!-- fontawesome's info-circle icon: https://fontawesome.com/license-->\n  <path fill=\"currentColor\" d=\"M256 8C119.043 8 8 119.083 8 256c0 136.997 111.043 248 248 248s248-111.003 248-248C504 119.083 392.957 8 256 8zm0 110c23.196 0 42 18.804 42 42s-18.804 42-42 42-42-18.804-42-42 18.804-42 42-42zm56 254c0 6.627-5.373 12-12 12h-88c-6.627 0-12-5.373-12-12v-24c0-6.627 5.373-12 12-12h12v-64h-12c-6.627 0-12-5.373-12-12v-24c0-6.627 5.373-12 12-12h64c6.627 0 12 5.373 12 12v100h12c6.627 0 12 5.373 12 12v24z\"/>\n</svg>\n";
+  var closeIcon = "\n<svg class=\"detailed-marker opened\" aria-hidden=\"true\" role=\"img\" xmlns=\"http://www.w3.org/2000/svg\" viewbox=\"0 0 512 512\">\n  <!-- fontawesome's fa-times-circle icon: https://fontawesome.com/license-->\n  <path fill=\"currentColor\" d=\"M256 8C119 8 8 119 8 256s111 248 248 248 248-111 248-248S393 8 256 8zm121.6 313.1c4.7 4.7 4.7 12.3 0 17L338 377.6c-4.7 4.7-12.3 4.7-17 0L256 312l-65.1 65.6c-4.7 4.7-12.3 4.7-17 0L134.4 338c-4.7-4.7-4.7-12.3 0-17l65.6-65-65.6-65.1c-4.7-4.7-4.7-12.3 0-17l39.6-39.6c4.7-4.7 12.3-4.7 17 0l65 65.7 65.1-65.6c4.7-4.7 12.3-4.7 17 0l39.6 39.6c4.7 4.7 4.7 12.3 0 17L312 256l65.6 65.1z\"/>\n</svg>\n";
   function addAltText() {
     var altTextEl = document.createElement('p');
     altTextEl.textContent = this.alt;
@@ -961,7 +959,8 @@
       this.dragHandler = drag.bind(this);
       this.clickHandler = click.bind(this);
       this.keydownHandler = keydown.bind(this);
-      this.closeendHandler = closeend.bind(this);
+      this.closeendHandler = this.resetPosition.bind(this);
+      this.toggleHandler = toggle.bind(this);
       instances$1.add(this);
     } // INSTANCE METHODS
 
@@ -988,10 +987,11 @@
             addAltText.call(this);
           }
 
-          this.transitionHandler.enable().bindTo('.details-marker');
+          this.transitionHandler.enable().bindTo('.detailed-marker');
           this.contents.addEventListener('mousedown', this.dragstartHandler);
           document.addEventListener('mouseup', this.dragendHandler);
           document.addEventListener('mousemove', this.dragHandler);
+          this.details.addEventListener('toggle', this.toggleHandler);
           this.details.addEventListener('closeend', this.closeendHandler);
           this.summary.addEventListener('keydown', this.keydownHandler);
           this.img.addEventListener('click', this.clickHandler);
@@ -1017,6 +1017,27 @@
         this.transitionHandler.destroy();
         instances$1["delete"](this);
         return this;
+      }
+    }, {
+      key: "setPosition",
+      value: function setPosition(_ref) {
+        var _ref$top = _ref.top,
+            top = _ref$top === void 0 ? this.pos.top : _ref$top,
+            _ref$left = _ref.left,
+            left = _ref$left === void 0 ? this.pos.left : _ref$left;
+        this.pos = {
+          top: top,
+          left: left
+        };
+        return this;
+      }
+    }, {
+      key: "resetPosition",
+      value: function resetPosition() {
+        this.pos = {
+          top: 0,
+          left: 0
+        };
       } // PROPERTIES
 
     }, {
@@ -1070,9 +1091,9 @@
           left: left
         };
       },
-      set: function set(_ref) {
-        var top = _ref.top,
-            left = _ref.left;
+      set: function set(_ref2) {
+        var top = _ref2.top,
+            left = _ref2.left;
         this.details.style.top = "".concat(top, "px");
         this.details.style.left = "".concat(left, "px");
       } // STATIC METHODS (PRIMARY API)
