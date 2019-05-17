@@ -38,6 +38,9 @@ function emitEvent(eventName, eventDetail) {
  * removal of the [open] attribute until the 'transitionend' event triggers
  */
 function summaryClickHandler(e) {
+  if (window.getComputedStyle(this.panel)['transition-property'] === 'none') {
+    return;
+  }
   if (this.open) {
     e.preventDefault();
     if (this.opening) {
