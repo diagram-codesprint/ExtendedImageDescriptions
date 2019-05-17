@@ -38,27 +38,24 @@ export function keydown(e) {
     const mod = (e.altKey) ? 10 : 1;
     const step = stepBase * mod;
     // TODO: Add check to ensure element doesn't go beyond right border
+    if (e.key.startsWith('Arrow')) e.preventDefault();
     if (e.key === 'ArrowRight') {
-      e.preventDefault();
       const change = parseInt(this.details.style.left || 0, 10) + step;
       this.details.style.left = `${change}px`;
     }
 
     if (e.key === 'ArrowLeft') {
-      e.preventDefault();
       const change = parseInt(this.details.style.left || 0, 10) - step;
       this.details.style.left = `${change}px`;
     }
 
     if (e.key === 'ArrowUp') {
-      e.preventDefault();
       const change = parseInt(this.details.style.top || 0, 10) - step;
       this.details.style.top = `${change}px`;
     }
 
     // TODO: Add check to ensure element doesn't go beyond bottom border
     if (e.key === 'ArrowDown') {
-      e.preventDefault();
       const change = parseInt(this.details.style.top || 0, 10) + step;
       this.details.style.top = `${change}px`;
     }
