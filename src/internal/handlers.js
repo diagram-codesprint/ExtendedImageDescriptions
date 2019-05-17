@@ -25,11 +25,10 @@ export function click() {
   }
 }
 
-export function closeend() {
-  this.pos = {
-    top: 0,
-    left: 0,
-  };
+export function toggle() {
+  if (!this.open) {
+    this.resetPosition();
+  }
 }
 
 const stepBase = 5;

@@ -5,7 +5,7 @@ import {
   dragend,
   click,
   keydown,
-  closeend,
+  toggle,
 } from './internal/handlers';
 import {
   addDefaultSummary,
@@ -33,7 +33,8 @@ export default class Detailed {
     this.dragHandler = drag.bind(this);
     this.clickHandler = click.bind(this);
     this.keydownHandler = keydown.bind(this);
-    this.closeendHandler = closeend.bind(this);
+    this.closeendHandler = this.resetPosition.bind(this);
+    this.toggleHandler = toggle.bind(this);
 
     instances.add(this);
   }
@@ -63,10 +64,11 @@ export default class Detailed {
         addAltText.call(this);
       }
 
-      this.transitionHandler.enable().bindTo('.details-marker');
+      this.transitionHandler.enable().bindTo('.detailed-marker');
       this.contents.addEventListener('mousedown', this.dragstartHandler);
       document.addEventListener('mouseup', this.dragendHandler);
       document.addEventListener('mousemove', this.dragHandler);
+      this.details.addEventListener('toggle', this.toggleHandler);
       this.details.addEventListener('closeend', this.closeendHandler);
       this.summary.addEventListener('keydown', this.keydownHandler);
       this.img.addEventListener('click', this.clickHandler);
@@ -88,6 +90,13 @@ export default class Detailed {
     this.transitionHandler.destroy();
     instances.delete(this);
     return this;
+  }
+
+  resetPosition() {
+    this.pos = {
+      top: 0,
+      left: 0,
+    };
   }
 
   // PROPERTIES
