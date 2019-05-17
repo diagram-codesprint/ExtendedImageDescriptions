@@ -147,14 +147,14 @@ summary::details-marker {
 
 /* details marker: an element-version of the ::details-marker pseudo-element */
 
-.details-marker {
+.detailed-marker {
   width: 1em;
   height: 1em;
   transition: transform var(--duration-expand) var(--easing-standard);
   transform-origin: center;
 }
 
-.details-marker.right {
+.detailed-marker.right {
   transform: rotate(90deg);
 }
 
@@ -162,29 +162,30 @@ details[open] .detailed-contents {
   transition: height var(--duration-collapse) var(--easing-standard);
 }
 
-details[open] .details-marker {
+details[open] .detailed-marker {
   transition: transform var(--duration-collapse) var(--easing-standard);
 }
 
-details[open] .details-marker.right {
+details[open] .detailed-marker.right {
   transform: rotate(180deg);
 }
 
-details[open] .details-marker.right.closing {
+details[open] .detailed-marker.right.closing {
   transform: rotate(90deg);
 }
 
-details[open] .details-marker.up {
+details[open] .detailed-marker.up {
   transform: rotate3d(1, 0, 0, 180deg);
 }
 
-details[open] .details-marker.up.closing {
+details[open] .detailed-marker.up.closing {
   transform: rotate3d(1, 0, 0, 0);
 }
 
 @media screen and (prefers-reduced-motion: reduce) {
+  details,
   .detailed-contents,
-  .details-marker {
+  .detailed-marker {
     transition: none !important;
   }
 }
@@ -195,8 +196,8 @@ summary {
 }
 
 details:not(.detailed-dragging) {
-  transition: top 195ms cubic-bezier(0, 0, 0.2, 1),
-    left 195ms cubic-bezier(0, 0, 0.2, 1);
+  transition: top 195ms var(--easing-standard),
+    left 195ms var(--easing-standard);
 }
 
 /* when using a mouse, show the summary on figure-hover (hide by default) */
