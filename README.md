@@ -6,6 +6,9 @@ Building off [work from the 2018 DIAGRAM Code Sprint](https://github.com/diagram
 
 Here is a [rendered view of the examples created from the 2019 hackathon](https://diagram-codesprint.github.io/ExtendedImageDescriptions/examples/examples.html).
 
+# Documentation
+Here is the [documentation]https://github.com/diagram-codesprint/ExtendedImageDescriptions/blob/master/documentation/ExtendedImageDescription-documentation.md) created.
+
 ## Developing
 
 This repository uses a variety of Node.js modules to assist with development.
