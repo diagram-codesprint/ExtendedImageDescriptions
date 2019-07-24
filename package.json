@@ -40,6 +40,14 @@
     {
       "name": "Evan Yamanishi",
       "email": "eyamanishi@wwnorton.com"
+    },
+    {
+      "name": "Clayton Lewis",
+      "email": "clayton.lewis@colorado.edu"
+    },
+    {
+       "name": "Tammy Speed",
+      "email": "tspeed90@gmail.com"
     }
   ],
   "main": "dist/index.js",
