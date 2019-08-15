@@ -46,7 +46,7 @@
       "email": "clayton.lewis@colorado.edu"
     },
     {
-       "name": "Tammy Speed",
+      "name": "Tammy Speed",
       "email": "tspeed90@gmail.com"
     }
   ],
@@ -61,15 +61,15 @@
     "test": "nyc ava"
   },
   "devDependencies": {
-    "@babel/core": "^7.4.4",
-    "babel-preset-airbnb": "^3.2.1",
-    "eslint": "^5.3.0",
-    "eslint-config-airbnb-base": "^13.1.0",
-    "eslint-plugin-import": "^2.17.2",
-    "rollup": "^1.12.1",
-    "rollup-plugin-babel": "^4.3.2",
-    "rollup-plugin-commonjs": "^10.0.0",
-    "rollup-plugin-node-resolve": "^5.0.0"
+    "@babel/core": "^7.5.5",
+    "babel-preset-airbnb": "^3.3.2",
+    "eslint": "^5.16.0",
+    "eslint-config-airbnb-base": "^13.2.0",
+    "eslint-plugin-import": "^2.18.2",
+    "rollup": "^1.19.4",
+    "rollup-plugin-babel": "^4.3.3",
+    "rollup-plugin-commonjs": "^10.0.2",
+    "rollup-plugin-node-resolve": "^5.2.0"
   },
   "dependencies": {
     "lodash.debounce": "^4.0.8"
