@@ -1,0 +1,41 @@
+<!-- Minimal authored markup -->
+<figure>
+  <img
+    src="..."
+    alt="A short description of the image"
+    aria-details="id-of-details"
+  />
+  <details id="id-of-details">
+    A much longer description of the image...
+  </details>
+  <figcaption>Figure 1.1: lorem ipsum...</figcaption>
+</figure>
+
+<!-- Generated markup -->
+<figure>
+  <img
+    src="..."
+    alt="A short description of the image"
+    aria-details="id-of-details"
+    id="detailed-img-id-of-details"
+  />
+  <details id="id-of-details">
+    <summary
+      aria-describedby="detailed-img-id-of-details"
+      title="More information"
+      aria-label="More information"
+    >
+      <svg class="detailed-marker closed" aria-hidden="true" role="img">
+        <!-- fontawesome's info-circle icon -->
+      </svg>
+      <svg class="detailed-marker opened" aria-hidden="true" role="img">
+        <!-- fontawesome's fa-times-circle icon -->
+      </svg>
+    </summary>
+    <div class="detailed-contents">
+      <p aria-hidden="true">A short description of the image</p>
+      A much longer description of the image...
+    </div>
+  </details>
+  <figcaption>Figure 1.1: lorem ipsum...</figcaption>
+</figure>
