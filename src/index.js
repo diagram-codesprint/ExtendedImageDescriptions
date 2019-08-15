@@ -56,7 +56,7 @@ export default class Detailed {
       if (!this.summary) {
         addDefaultSummary.call(this);
       }
-      this.hasContents = this.details.lastElementChild !== this.summary;
+      this.hasContents = this.details.lastChild !== this.summary;
       describeSummary.call(this);
       createContents.call(this);
 
