@@ -55,20 +55,35 @@
     return obj;
   }
 
-  function _objectSpread(target) {
+  function ownKeys(object, enumerableOnly) {
+    var keys = Object.keys(object);
+
+    if (Object.getOwnPropertySymbols) {
+      var symbols = Object.getOwnPropertySymbols(object);
+      if (enumerableOnly) symbols = symbols.filter(function (sym) {
+        return Object.getOwnPropertyDescriptor(object, sym).enumerable;
+      });
+      keys.push.apply(keys, symbols);
+    }
+
+    return keys;
+  }
+
+  function _objectSpread2(target) {
     for (var i = 1; i < arguments.length; i++) {
       var source = arguments[i] != null ? arguments[i] : {};
-      var ownKeys = Object.keys(source);
 
-      if (typeof Object.getOwnPropertySymbols === 'function') {
-        ownKeys = ownKeys.concat(Object.getOwnPropertySymbols(source).filter(function (sym) {
-          return Object.getOwnPropertyDescriptor(source, sym).enumerable;
-        }));
+      if (i % 2) {
+        ownKeys(source, true).forEach(function (key) {
+          _defineProperty(target, key, source[key]);
+        });
+      } else if (Object.getOwnPropertyDescriptors) {
+        Object.defineProperties(target, Object.getOwnPropertyDescriptors(source));
+      } else {
+        ownKeys(source).forEach(function (key) {
+          Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key));
+        });
       }
-
-      ownKeys.forEach(function (key) {
-        _defineProperty(target, key, source[key]);
-      });
     }
 
     return target;
@@ -951,7 +966,7 @@
       _classCallCheck(this, Detailed);
 
       this.details = details;
-      this.options = _objectSpread({}, Detailed.Defaults, options);
+      this.options = _objectSpread2({}, Detailed.Defaults, {}, options);
       this.enabled = false;
       this.transitionHandler = new DetailsTransition(this.details);
       this.dragstartHandler = dragstart.bind(this);
@@ -979,7 +994,7 @@
             addDefaultSummary.call(this);
           }
 
-          this.hasContents = this.details.lastElementChild !== this.summary;
+          this.hasContents = this.details.lastChild !== this.summary;
           describeSummary.call(this);
           createContents.call(this);
 
@@ -1016,19 +1031,6 @@
         if (this.enabled) this.disable();
         this.transitionHandler.destroy();
         instances$1["delete"](this);
-        return this;
-      }
-    }, {
-      key: "setPosition",
-      value: function setPosition(_ref) {
-        var _ref$top = _ref.top,
-            top = _ref$top === void 0 ? this.pos.top : _ref$top,
-            _ref$left = _ref.left,
-            left = _ref$left === void 0 ? this.pos.left : _ref$left;
-        this.pos = {
-          top: top,
-          left: left
-        };
         return this;
       }
     }, {
@@ -1091,9 +1093,9 @@
           left: left
         };
       },
-      set: function set(_ref2) {
-        var top = _ref2.top,
-            left = _ref2.left;
+      set: function set(_ref) {
+        var top = _ref.top,
+            left = _ref.left;
         this.details.style.top = "".concat(top, "px");
         this.details.style.left = "".concat(left, "px");
       } // STATIC METHODS (PRIMARY API)
