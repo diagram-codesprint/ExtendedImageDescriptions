@@ -29,11 +29,13 @@ EID allows you, the author, to control many aspects of the reader experience:
 
 Your image is specified in HTML as a _figure_ element, as in the following example:
 
-```
-<figure> <img src="images/louvre.jpg" alt="The Louvre" aria-details="ext1" />
-	<details id="ext1">
-          This is a photograph of the Louvre Museum in France at night. The entrance to the museum is a large pyramid made out of glass.
-     </details>
+```html
+<figure>
+  <img src="images/louvre.jpg" alt="The Louvre" aria-details="ext1" />
+  <details id="ext1">
+    This is a photograph of the Louvre Museum in France at night. The entrance
+    to the museum is a large pyramid made out of glass.
+  </details>
 </figure>
 ```
 
@@ -54,53 +56,62 @@ Note that the alt text is NOT added for screenreader users, since they will alre
 
 If you prefer not to show the alt text to sighted readers, you can control that in two ways. You can add the attribute _data-noalt_ to the detail tag for a figure, as in this example:
 
-```
-<details  id="ext1" open data-noalt>
+```html
+<details id="ext1" open data-noalt></details>
 ```
 
 You can also specify this behavior for all figures on your page when you invoke EID, as described in the _Making EID work_ section, below.
 
-### Whether the description is shown to sighted readers by default.
+### Whether the description is shown to sighted readers by default
 
 Normally, sighted users are shown a button, and they press the button to see the description. If you want the description to be shown without requiring them to press the button, you can add the attribute _open_ to the details element:
 
-```
-<details  id="ext1" open>
+```html
+<details id="ext1" open></details>
 ```
 
-### The appearance and position of the button that readers use to display the description.
+### The appearance and position of the button that readers use to display the description
 
 The button is displayed in the top right corner of the image, by default. If this position obscures an important part of the image, the button can be moved to the top left corner, by changing the markup for the figure in this way:
 
-```
-<details  id="ext1" data-position="top left">
+```html
+<details id="ext1" data-position="top left"></details>
 ```
 
 Other possible placements are "bottom left" or "bottom right".
 
 By default, the button is shown as info-circle. To change this, add a summary element to the markup for a figure, as in the following example. Be sure to add a _title_ attribute to your summary element, so that the screenreader can describe the button. The title will also serve as a tooltip for the button. Here we've linked to Font Awesome, to pick up an icon of cat for the button, and added a summary element:
 
-```
-<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css" integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
-<figure> <img src="images/louvre.jpg" alt="The Louvre" aria-details="ext1" />
-	<summary title="More information"><i class="fas fa-cat"></i></summary>
-	<details id="ext1">
-          This is a photograph of the Louvre Museum in France at night. The entrance to the museum is a large pyramid made out of glass.
-     </details>
+```html
+<link
+  rel="stylesheet"
+  href="https://use.fontawesome.com/releases/v5.7.0/css/all.css"
+  integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ"
+  crossorigin="anonymous"
+/>
+<figure>
+  <img src="images/louvre.jpg" alt="The Louvre" aria-details="ext1" />
+  <summary title="More information"
+    ><span class="fas fa-cat" aria-hidden="true"></span
+  ></summary>
+  <details id="ext1">
+    This is a photograph of the Louvre Museum in France at night. The entrance
+    to the museum is a large pyramid made out of glass.
+  </details>
 </figure>
 ```
 
 _Note_: If you are using a framework that has other ways to provide accessible names for controls, and/or tooltips, you can use that rather than providing a title element.
 
-### Hover behavior.
+### Hover behavior
 
 By default, the button that controls the display of a description only appears when the pointer is on the figure. To change this, so that the control is always shown, add a new style sheet (.css file) to your project, and include the following style rule:
 
-```
+```css
 .ext-summary {
-      color: white;
-      background-color: rgba(0, 0, 0, 0.8);
-  }
+  color: white;
+  background-color: rgba(0, 0, 0, 0.8);
+}
 ```
 
 _Note_: On mobile devices or tablets, with no pointer, hover behavior is a bit different. Tapping a figure causes the button to be displayed.
@@ -109,33 +120,34 @@ _Note_: On mobile devices or tablets, with no pointer, hover behavior is a bit d
 
 Your project will have a file with Javascript code that executes after your page loads. In that file you'll need to ask EID to enhance your page with the features we've just described. Here is a line of code to do that:
 
-```
+```javascript
 Details.enhanceAll();
 ```
 
 If you do not want alt text to be included when your description is shown to sighted readers, you can add an option, as follows:
 
-```
+```javascript
 Details.enhanceAll({noalt=true});
 ```
 
 EID also provides finer levels of control. If you have detail elements in figures on your page that you do not want EID to process, you can use a call like this:
 
-```
-Details.enhanceAll("some selector");
+```javascript
+Details.enhanceAll('some selector');
 ```
 
 where "some selector" picks out only the detail elements you want EID to process. You can include both a selector, and the noalt option, like this:
 
-```
-Details.enhanceAll("some selector",{noalt:true});
+```javascript
+Details.enhanceAll('some selector', { noalt: true });
 ```
 
 EID also provides a call that will enhance a single element:
 
-```
+```javascript
 Details.enhance(detailsElement, [options]);
 ```
 
-##EID Style sheet
+## EID Style sheet
+
 Some aspects of EID's behavior are specified in EID's CSS style sheet. If you don't include this style sheet in your project, you'll likely see some divergence from the description above. For example, positioning of the description control will probably be different.
