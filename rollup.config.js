@@ -15,6 +15,7 @@ export default {
     babel({
       babelrc: false,
       presets: ['airbnb'],
+      runtimeHelpers: true,
     }),
   ],
 };
